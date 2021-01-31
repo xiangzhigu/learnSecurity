@@ -1,5 +1,6 @@
 package com.xiangzhi.demo.controller;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class FirstDemoContoller {
 
-    @GetMapping("/")
+    @Secured("ROLE_CDM")           //专门判断是否拥有role的
+    @GetMapping("/demo")
     public String demo(){
         return "多喝热水";
     }
