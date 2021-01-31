@@ -1,7 +1,10 @@
 package com.xiangzhi.demo.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author xiangzhi.gu
@@ -14,4 +17,27 @@ public class FirstDemoContoller {
     public String demo(){
         return "多喝热水";
     }
+
+    @GetMapping("/showLogin")
+    public ModelAndView showLogin(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login");
+        return modelAndView;
+    }
+
+
+    @GetMapping("/showMain")      //
+    public ModelAndView Main(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("main");
+        return modelAndView;
+    }
+
+    @GetMapping("/showFail")      //
+    public ModelAndView showFail(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("fail");
+        return modelAndView;
+    }
+
 }
