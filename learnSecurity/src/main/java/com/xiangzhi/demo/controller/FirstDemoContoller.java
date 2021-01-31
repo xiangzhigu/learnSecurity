@@ -1,6 +1,7 @@
 package com.xiangzhi.demo.controller;
 
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class FirstDemoContoller {
 
-    @Secured("ROLE_CDM")           //专门判断是否拥有role的
+    //@Secured("ROLE_CDM")           //专门判断是否拥有role的
+//    @PreAuthorize("hasAuthority('privilege3')")
     @GetMapping("/demo")
     public String demo(){
         return "多喝热水";
