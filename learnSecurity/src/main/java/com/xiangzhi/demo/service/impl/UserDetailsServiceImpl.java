@@ -30,7 +30,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         //从数据库中获取密码
         String password = "789@Test";
         String encodePwd = encoder.encode(password);
-        UserDetails userDetails = new User(username,encodePwd, AuthorityUtils.commaSeparatedStringToAuthorityList("privilege1,privilege2"));
+        UserDetails userDetails = new User(username,encodePwd, AuthorityUtils.commaSeparatedStringToAuthorityList("privilege1,privilege2,ROLE_CDM"));  //如果是角色要求 ROLE_作为前缀
         return userDetails;
     }
 }
