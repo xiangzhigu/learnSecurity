@@ -58,7 +58,8 @@ public class MyWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
                 .antMatchers("/showLogin","/showFail").permitAll()
 //                .antMatchers("/authority").hasAuthority("privilege1")
                 .antMatchers("/authority").hasAnyAuthority("privilege1","abc")
-                .antMatchers("/role").hasRole("CDM")
+//                .antMatchers("/role").hasRole("CDM")
+                .antMatchers("/role").access("@myServiceImpl.hasPermission(request,authentication)")
                 .antMatchers("/ip").hasIpAddress("192.168.31.207")         //外界无法访问
                 .antMatchers("/abc").denyAll()//放行
                 .anyRequest().authenticated();
