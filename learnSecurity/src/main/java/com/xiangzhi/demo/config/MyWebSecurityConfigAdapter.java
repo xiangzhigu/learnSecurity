@@ -1,10 +1,13 @@
 package com.xiangzhi.demo.config;
 
+import com.xiangzhi.demo.exception.MyAccessDeniedHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
@@ -19,6 +22,8 @@ import java.io.IOException;
  */
 @Configuration
 public class MyWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private MyAccessDeniedHandler myAccessDeniedHandler;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 //        http.formLogin(); //所有与表单有关系的
@@ -50,8 +55,13 @@ public class MyWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
                 .passwordParameter("myPassword");
 
         http.authorizeRequests()
-                .antMatchers("/showLogin","/showFail").permitAll() //放行
+                .antMatchers("/showLogin","/showFail").permitAll()
+                .antMatchers("/abc").denyAll()//放行
                 .anyRequest().authenticated();
+
+        http.exceptionHandling()
+//                .accessDeniedPage("同步请求方式返回页面的请求url")
+                .accessDeniedHandler(myAccessDeniedHandler);
 
         http.csrf().disable();
     }
